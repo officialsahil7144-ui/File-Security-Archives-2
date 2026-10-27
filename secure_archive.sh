@@ -1,18 +1,18 @@
 
 #!/usr/bin/env bash
-set -e
+set -euo pipefail
 
-WORK="security_lab"
-mkdir -p "$WORK"
+LAB_DIR="security_lab"
+mkdir -p "$LAB_DIR"
 
-printf 'Confidential lab note\n' > "$WORK/notes.txt"
+printf 'Confidential lab notes\n' > "$LAB_DIR/notes.txt"
+chmod 600 "$LAB_DIR/notes.txt"
 
-chmod 600 "$WORK/notes.txt"
+echo "File permissions:"
+ls -l "$LAB_DIR/notes.txt"
 
-tar -czf "$WORK/notes.tar.gz" "$WORK/notes.txt"
+tar -czf security_lab.tar.gz "$LAB_DIR"
 
-printf '%s\n' "Permissions:"
-ls -l "$WORK/notes.txt"
-
-printf '%s\n' "Archive contents:"
-tar -tzf "$WORK/notes.tar.gz"
+echo
+echo "Archive contents:"
+tar -tzf security_lab.tar.gz
